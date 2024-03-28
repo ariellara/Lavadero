@@ -1,6 +1,9 @@
-<div class="row">
-    <div class="col-2"><label class="label">Ingrese el Periodo a Buscar</label></div><br>
-    <div class="col-10">
+
+    
+   <table  align="center">
+    <tr><td><label class="label center">Ingrese el Periodo a Buscar</label></td><tr>
+   <tr>
+    <td>
         <form method="post">
             <label>Fecha Inicial</label>
             <input type="date" name="fechaInicial" required>
@@ -8,14 +11,13 @@
             <input type="date" name="fechafinal" required>
             <input type="submit" value="Buscar">
         </form>
-    </div>
-</div>
+</td>
+</tr>
+</table>
+
+
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-6">
-          <table id="facturasTable" class="table table-striped table-bordered">
+         <table id="facturasTable" class="facturasTable">
             <thead>
               <tr>
                 <th>Numero</th>
@@ -37,11 +39,14 @@
                 $resultado = mysqli_query($mysqli, $sql);
 
                 while ($fila = mysqli_fetch_assoc($resultado)) {
-
+                    $factura = $fila['numero_factura'] ;
+                    $total = number_format($fila['total'], 0, '.', ',');
                   echo "<tr>";
                   echo "<td>" . $fila['numero_factura'] . "</td>";
                   echo "<td>" . $fila['fecha'] . "</td>";
-                  echo "<td>" . $fila['total'] . "</td>";
+                  echo "<td> $ " . $total . "</td>";
+                  echo  "<td><a type=button   data-toggle=modal data-target=#myModal onclick='openModal($factura)'><img src=icon/ver.png width=80 height=25></a>
+                  </td>";
                   echo "</tr>";
                 }
 
@@ -50,54 +55,34 @@
               ?>
             </tbody>
           </table>
+        
         </div>
+
+
        
-      </div>
-    </div>
-  </div>
+     
+<link rel="stylesheet" href="js/bootstrap.min.css">
+<link rel="stylesheet" href="js/letras.css">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Detalles </h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body" id="modalBody">
+               <!-- Contenido del modal -->
+           </div>
+       </div>
+   </div>
 </div>
 
-
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/frontend.js"></script>
 
 <style>
-    /* Estilos para la tabla */
-    #facturasTable {
-        width: 50%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    #facturasTable th,
-    #facturasTable td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    #facturasTable th {
-        background-color: #f2f2f2;
-    }
-
-    #facturasTable tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    #facturasTable tr {
-        height: 20px;
-        /* Ajusta la altura según sea necesario */
-    }
-
-    /* Aplicar estilos a las celdas de la tabla */
-    #facturasTable td {
-        padding: 5px;
-        /* Ajusta el relleno interno según sea necesario */
-        border: 1px solid #ddd;
-        /* Añade un borde para separar las celdas */
-    }
-
-    /* Opcional: Estilos adicionales para las celdas de encabezado */
-    #facturasTable th {
-        background-color: #f2f2f2;
-        /* Fondo gris claro para las celdas de encabezado */
-    }
+  
 </style>
