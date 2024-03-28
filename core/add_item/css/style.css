@@ -1,0 +1,21 @@
+.icono
+{
+    width: 20px;
+    height: 20px;
+}
+.contenedor {
+    display: flex; /* Utilizamos flexbox para crear el diseño de dos columnas */
+  }
+  
+  .columna {
+    flex: 1; /* Hace que ambas columnas tengan el mismo ancho */
+    padding: 10px; /* Espacio interior para las columnas */
+    border: 1px solid #ccc; /* Borde opcional para las columnas */
+  }
+  
+  
+  
+  
+  
+  
+  

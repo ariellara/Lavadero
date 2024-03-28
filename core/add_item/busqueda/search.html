@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <style>
+
+
+    </style>
+   <link rel="stylesheet" href="css/style.css"> 
+</head>      	
+        <script src="js/bussinessearch.js"></script>
+        <script src="js/bussines.js"></script>
+	</head>
+    <body onload ="cargarData(9)">
+       
+        <table align="center" width="100">
+            <tr><td>
+              <div class="contenedor">  
+                <div>
+                 
+                        <h4>Seleccione su Busqueda</h1>
+                          Busqueda por Nombre   <input type="radio" id="opcion1" name="opcion" value="opcion1" onclick="mostrarSearch('search_name')"> 
+                          
+                          Busqueda por Factura <input type="radio" id="opcion3" name="opcion" value="opcion3" onclick="mostrarSearch('search_res')" > 
+                        
+                          <hr>
+                </div>
+                <div id="search_name"  class="mostrar-div">
+                    <form >
+                   Nombre Producto   <input type="text" class="form-data" id = "id_nombre" required placeholder=" Nombre producto">  <input type="button" value="Buscar" onclick="recojerDatos(1)">
+               <form>
+                </div>
+                <div id="search_tipe"  class="mostrar-div">
+                  <form>
+                 Area <select id=id_area name = "id_area"  onclick="cargarData(3)"  required>
+
+                  </select>
+                  <label for="">Sub Area *</label>
+							<select  id="id_subarea" name = "id_subarea"  required onclick="cargarData(4)">
+								
+							</select> 
+              <label for="">Documento *</label>
+							<select id="documento" name = "documento"  required onclick="cargarData(5)">
+								
+							</select>
+              <input type="button" value="Buscar" onclick="recojerDatos(2)">
+              </form>
+           
+                </div>
+                <div id = "search_res" class="mostrar-div">
+                  <form>
+                  Numero Factura  <input type="text" class="form-data" id = "id_factura" required placeholder=" Numero Factura">  <input type="button" value="Buscar" onclick="recojerDatos(2)">
+                  
+                    </form>
+                </div>
+                <div id =tabla-container>
+                    
+                </div>
+      
+
+              </div>  
+            </td></tR>
+
+        </table>
+
+    </body>
