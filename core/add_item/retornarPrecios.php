@@ -20,7 +20,7 @@ $filtros = explode("-", $term);
                         from tb_producto t, tb_inventario i 
                         where t.id  = i.idProducto
                         and t.nombre_producto = '$filtros[0]'
-                        and i.id_factura = $filtros[1] ";
+                        and i.id_factura = '$filtros[1]' ";
 
 $result = $conn->query($sql);
 

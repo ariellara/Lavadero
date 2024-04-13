@@ -4,7 +4,7 @@ include('conexion.php');
 $datosJSON = file_get_contents('php://input');
 $datos = json_decode($datosJSON, true);
 $fechaActual = date("Y-m-d H:i:s");
-
+$totalVenta = 0;
 foreach ($datos as $item) {
     $numeroFactura = $item['numeroFactura'];
     $detalle = $item['detalle'];
@@ -12,6 +12,7 @@ foreach ($datos as $item) {
     $precioCompra = $item['precioUnitario'];
     $precioVenta = $item['precioVenta'];
     $total = $item['total'];
+    $totalVenta = $totalVenta + $item['total'];
     $detalep = explode('-', $detalle);
     $detalleProd =  $item['detalle'];
     $factura =  $item['facturar'];;
@@ -39,7 +40,7 @@ foreach ($datos as $item) {
 $sql = "INSERT INTO facturas
                                   (numero_factura,fecha,total)
                                      VALUES 
-                                    ('$numeroFactura','$fechaActual','$total')";
+                                    ('$numeroFactura','$fechaActual','$totalVenta')";
         if (mysqli_query($conn, $sql)) {
             print "Venta exitosa";
         } else {

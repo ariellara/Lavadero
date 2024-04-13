@@ -1,5 +1,5 @@
 function openModal(parametro) {
-    $.get(`backend.php?parametro=${parametro}`, function(data) {
+    $.get(`resultados.php?parametro=${parametro}`, function(data) {
         let modalBody = $('#modalBody');
         modalBody.empty(); // Limpiar el contenido actual del modal
  

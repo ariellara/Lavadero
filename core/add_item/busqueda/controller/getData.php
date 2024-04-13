@@ -1,12 +1,11 @@
 <?php
-   include('conexion.php');
-   $tipo = $_GET['tipo'];
- 
-   $datos = array();
-   if($tipo == 1)
-   {
-    
-   $datos = array();
+include ('conexion.php');
+$tipo = $_GET['tipo'];
+
+$datos = array();
+if ($tipo == 1) {
+
+    $datos = array();
     $nombre = $_GET['nombre'];
     $sql = "SELECT 
                   pr.nombre_producto,
@@ -21,11 +20,10 @@
                     
                   
                    and pr.id = ip.idProducto";
-   }
-   if($tipo == 2)
-   {
-    
-   $datos = array();
+}
+if ($tipo == 2) {
+
+    $datos = array();
     $nombre = $_GET['factura'];
     $sql = "SELECT 
                   pr.nombre_producto,
@@ -40,44 +38,58 @@
                
                   
                    and pr.id = ip.idProducto";
-   }
+}
 
-   if($tipo == 3)
-   {
-     $nombre = $_GET['id'];
-     $factura = $_GET['producto'];
-     $sql = "DELETE FROM tb_files WHERE id_file = '$id'";
-     mysqli_query($conn, $sql);
-     exit();
-    // header('Location: ../upload_file/search.html'); 
-   }
-   
-   
+if ($tipo == 3) {
 
-            if ($result = mysqli_query($conn, $sql)) 
-            {
-            while ($row = mysqli_fetch_row($result)) 
-            {
-                $opcion = array(
-                  
-                    "nombre" => $row[0],
-                    "cantidad" => $row[1],
-                    "precio_compra" => $row[2],
-                    "precio_venta" => $row[3],
-                    "factura" => $row[4],
-                    "cantidadInicial" => $row[5]
-                       );
-                $datos[] = $opcion;
-            }
-            
-            }  
-            header('Content-Type: application/json');
-            $jsonData = json_encode($datos);
-            echo $jsonData;
-   
+    include ('conexion.php');
+    $nombre = $_GET['id'];
+    $factura = $_GET['factura'];
+    $id = retornarid($nombre, $conn);
+    $sql = "DELETE FROM tb_inventario WHERE idProducto = '$id' and id_factura = '$factura'";
+    mysqli_query($conn, $sql);
+    header('Location: ../add_item/search.html'); 
+    exit();
+     
+}
 
-  
- 
+
+
+if ($result = mysqli_query($conn, $sql)) {
+    while ($row = mysqli_fetch_row($result)) {
+        $opcion = array(
+
+            "nombre" => $row[0],
+            "cantidad" => $row[1],
+            "precio_compra" => $row[2],
+            "precio_venta" => $row[3],
+            "factura" => $row[4],
+            "cantidadInicial" => $row[5]
+        );
+        $datos[] = $opcion;
+    }
+
+}
+header('Content-Type: application/json');
+$jsonData = json_encode($datos);
+echo $jsonData;
+
+
+
+function retornarid($nombre, $conn)
+{
+
+    $sql = "SELECT id from tb_producto where nombre_producto = '$nombre'";
+
+    $id = "";
+    if ($result = mysqli_query($conn, $sql)) {
+        while ($row = mysqli_fetch_row($result)) {
+            $id = $row[0];
+        }
+    }
+
+  return $id;
+
+}
 
 ?>
-

@@ -81,7 +81,7 @@
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/frontend.js"></script>
+<script src="frontend.js"></script>
 
 <style>
   
